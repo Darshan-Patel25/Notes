@@ -1,1 +1,4 @@
-hello
+
+
+What is a Component in React?
+A component in React is like a small, reusable building block that shows a part of your webpage and handles its behavior. It helps you break the webpage into smaller, manageable parts, making your code easier to understand, fix, and reuse.
