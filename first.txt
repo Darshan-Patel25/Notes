@@ -1,4 +1,131 @@
 
 
-What is a Component in React?
-A component in React is like a small, reusable building block that shows a part of your webpage and handles its behavior. It helps you break the webpage into smaller, manageable parts, making your code easier to understand, fix, and reuse.
+***What is a Component in React? ****
+-part of element 
+-piece of code that can reusable
+
+A component in React is like a small, reusable building block that shows a part of your webpage and handles its behavior. 
+It helps you break the webpage into smaller, manageable parts, making your code easier to understand, fix, and reuse.
+
+**** React Component Types: *****
+1. Functional Components: Components written as functions.
+2. Class Components: Components written as ES6 classes.
+3. Stateful Components: Components that have and manage internal state.
+4. Stateless Components: Components that do not manage state and are focused on rendering UI based on props.
+5. Higher-Order Components (HOCs): Functions that enhance or augment other components.
+6. Functional Components with Hooks: Functional components that use hooks for state and lifecycle management.
+7. Context Providers: Components used to provide and consume global state using Context API.
+8. Error Boundaries: Components that catch JavaScript errors in their child components.
+9. Controlled Components: Form elements that are controlled by React state.
+10. Uncontrolled Components: Form elements that rely on the DOM to handle their values.
+11.pure component:Similar to class components but faster because they only re-render if the data (props or state) changes.
+
+1> Functional component:
+
+function hello(props) {
+  return (
+
+    <h1>Hello</h1>
+    <h2>duniya</h2>
+  ) 
+}
+
+
+2) Class component :
+
+class Welcome extends React.Component {
+  render() {
+    return (
+        <h1>Hello</h1>
+        <h2>duniya</h2>
+
+    )
+  }
+}
+
+3) pure component:
+
+import React, { PureComponent } from 'react';
+
+class Counter extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = { count: 0 };
+  }
+
+  increment = () => {
+    this.setState({ count: this.state.count + 1 });
+  };
+
+  render() {
+    console.log('Rendering...');
+    return (
+      <div>
+        <h1>Count: {this.state.count}</h1>
+        <button onClick={this.increment}>Increment</button>
+      </div>
+    );
+  }
+}
+
+export default Counter;
+
+
+
+4> Stateful Components:
+
+Components that manage their own internal state.
+Typically, class components or functional components using useState hook can be stateful.
+
+const Counter = () => {
+  const [count, setCount] = useState(0);
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+    </div>
+  );
+};
+
+
+5> Stateless (or Presentational) Components :
+
+
+These components don’t have any internal state and are usually responsible for rendering UI based on the props they receive.
+They are often referred to as "dumb components" or "pure components."
+
+const WelcomeMessage = (props) => {
+  return <h1>Welcome, {props.username}!</h1>;
+};
+
+
+6> Higher-Order Components (HOCs):
+
+These are functions that take a component and return a new component with additional functionality.
+HOCs are used to reuse component logic across the app, such as adding authentication checks, fetching data, or adding event listeners.
+
+function withLoading(Component) {
+  return function WithLoading(props) {
+    if (props.isLoading) {
+      return <div>Loading...</div>;
+    }
+    return <Component {...props} />;
+  };
+}
+
+
+7> Context Providers:
+These components use React's Context API to manage global state and pass data down through the component tree without having
+ to pass props manually.
+
+const UserContext = React.createContext();
+
+const UserProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
+  
+  return (
+    <UserContext.Provider value={{ user, setUser }}>
+      {children}
+    </UserContext.Provider>
+  );
+};
